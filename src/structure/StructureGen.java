@@ -14,6 +14,8 @@ public class StructureGen {
 		Floor.setFloorMat(room, Material.WOOD);
 		
 		Roof.makeRoof(room, BlockFace.EAST, TreeSpecies.BIRCH);
+		Roof.makeRoofSide(room, BlockFace.EAST, Material.SMOOTH_BRICK, true);
+		Roof.makeRoofWindow(room, BlockFace.EAST, Material.GLASS);
 		
 		Wall.setWallMat(room, BlockFace.NORTH, Material.COBBLESTONE);
 		Wall.setWallMat(room, BlockFace.EAST, Material.COBBLESTONE);

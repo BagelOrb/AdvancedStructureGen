@@ -9,6 +9,7 @@ public class Tuple<L,R> { // implements ConfigurationSerializable  {
 		fst = ll; snd = rr;
 	}
 
+	@Override
 	public String toString() {
 		return "("+fst+", "+snd+")";
 	}
