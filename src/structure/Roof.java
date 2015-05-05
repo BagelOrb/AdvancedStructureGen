@@ -15,6 +15,22 @@ import utils.MatUtils;
 
 public class Roof {
 
+	
+
+	public static void setRoofMat(Room room, Material mat) {
+		for (int x = 1 ; x < room.width - 1; x++)
+			for (int z = 1; z < room.depth - 1; z++)
+				room.corner.getRelative(x, room.height - 1, z).setType(mat);
+		
+	}
+
+	public static void setRoofCheckerBoard(Room room, Material mat1, Material mat2) {
+		for (int x = 1 ; x < room.width - 1; x++)
+			for (int z = 1; z < room.depth - 1; z++)
+				room.corner.getRelative(x, room.height - 1, z).setType(((x+z) % 2 == 1)? mat1 : mat2);
+		
+	}
+	
 	public static void makeRoof(Room room, BlockFace direction, TreeSpecies species)
 	{				
 		Material stair_mat = MatUtils.getStairs(species);
