@@ -1,7 +1,7 @@
-name: WorldGenTry
-main: main.WorldGenTry
-description: WorldGenTry descr
+name: AdvancedStructureGen
+main: main.AdvancedStructureGen
+description: AdvancedStructureGen descr
 version: 0.1
-author:  TK
+author: JB & TK
 depend:
 commands:
