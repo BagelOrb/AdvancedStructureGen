@@ -1,6 +1,5 @@
 package structure;
 
-import java.util.function.Function;
 
 import main.Debug;
 
@@ -54,13 +53,13 @@ public class Roof {
 
 			for (int x = 1; x < room.width - 1; x++)
 			{
-				for (int zy = 0; zy < room.width/2; zy++)
+				for (int zy = 0; zy < room.depth/2; zy++)
 				{
 					Block one = room.corner.getRelative(x, room.height+zy, zy); 
 					one.setType(stair_mat);
 					BlockUtils.setStairsData(one, BlockFace.SOUTH, false);
 
-					Block two = room.corner.getRelative(x, room.height+zy, room.width - 1 - zy); 
+					Block two = room.corner.getRelative(x, room.height+zy, room.depth - 1 - zy); 
 					two.setType(stair_mat);
 					BlockUtils.setStairsData(two, BlockFace.NORTH, false);
 					
@@ -68,7 +67,7 @@ public class Roof {
 				
 				if (room.width % 2 == 1)
 				{
-					Block top = room.corner.getRelative(x, room.height + room.width / 2, room.width / 2); 
+					Block top = room.corner.getRelative(x, room.height + room.depth / 2, room.depth / 2); 
 					top.setType(Material.WOOD_STEP);
 					BlockState state = top.getState();
 					state.setData(new WoodenStep(species, false));
