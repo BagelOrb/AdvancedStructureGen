@@ -2,7 +2,6 @@ package structure;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 
 public class StructureGen {
 
@@ -12,13 +11,14 @@ public class StructureGen {
 		Placement.liftStructure(room);
 		Floor.setFloorMat(room, Material.WOOD);
 		
-		Wall.setWallMat(room, BlockFace.NORTH, Material.COBBLESTONE);
-		Wall.setWallMat(room, BlockFace.EAST, Material.COBBLESTONE);
-		Wall.setWallMat(room, BlockFace.SOUTH, Material.COBBLESTONE);
-		Wall.setWallMat(room, BlockFace.WEST, Material.COBBLESTONE);
-		Wall.setWallCornersMat(room, Material.LOG);
+		room.wallNorth.setWallMat(Material.SMOOTH_BRICK);
+		room.wallEast.setWallMat(Material.SMOOTH_BRICK);
+		room.wallSouth.setWallMat(Material.SMOOTH_BRICK);
+		room.wallWest.setWallMat(Material.SMOOTH_BRICK);
 		
-		Roof.makeRoof(room, BlockFace.NORTH);
+		room.setWallCornersMat(Material.SMOOTH_BRICK);
+		
+		//Roof.makeRoof(room, BlockFace.NORTH);
 	}
 	
 }

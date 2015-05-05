@@ -5,8 +5,16 @@ import org.bukkit.block.BlockFace;
 
 public class Wall {
 
-	public static void setWallMat(Room room, BlockFace direction, Material mat) {
-		switch (direction) {
+	public Room room;
+	public BlockFace direction;
+	
+	public Wall(Room room, BlockFace wallDirection) {
+		this.room = room;
+		this.direction = wallDirection;
+	}
+	
+	public void setWallMat(Material mat) {
+		switch (this.direction) {
 		
 		case NORTH:
 			for (int x = 1 ; x < room.width -1; x++)
@@ -37,20 +45,5 @@ public class Wall {
 		}
 		
 	}
-	
-	public static void setWallCornersMat(Room room, Material mat) {
 
-		for (int y = 0; y < room.height; y++)
-			room.corner.getRelative(0, y, 0).setType(mat);	
-		
-		for (int y = 0; y < room.height; y++)
-			room.corner.getRelative(room.width -1, y, 0).setType(mat);
-		
-		for (int y = 0; y < room.height; y++)
-			room.corner.getRelative(0, y, room.depth -1).setType(mat);
-		
-		for (int y = 0; y < room.height; y++)
-			room.corner.getRelative(room.width -1, y, room.depth -1).setType(mat);
-		
-	}
 }
