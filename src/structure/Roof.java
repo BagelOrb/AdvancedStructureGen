@@ -4,12 +4,10 @@ import main.Debug;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
-
 import utils.BlockUtils;
 
 public class Roof {
 
-	@SuppressWarnings("deprecation")
 	public static void makeRoof(Room room, BlockFace direction)
 	{
 //		ns = z
@@ -22,17 +20,17 @@ public class Roof {
 			{
 				for (int xy = 0; xy < room.width/2; xy++)
 				{
-					room.corner.getRelative(xy, xy, z).setType(Material.WOOD_STAIRS);
-					room.corner.getRelative(xy, xy, z).setData(BlockUtils.toTorchData(BlockFace.EAST));
+					room.corner.getRelative(xy, room.height+xy, z).setType(Material.WOOD_STAIRS);
+					BlockUtils.setStairsData(room.corner.getRelative(xy, room.height+xy, z), BlockFace.EAST, false);
 
-					room.corner.getRelative(room.width - xy, xy, z).setType(Material.WOOD_STAIRS);
-					room.corner.getRelative(room.width - xy, xy, z).setData(BlockUtils.toTorchData(BlockFace.WEST));
+					room.corner.getRelative(room.width - 1 - xy, room.height+xy, z).setType(Material.WOOD_STAIRS);
+					BlockUtils.setStairsData(room.corner.getRelative(room.width - 1 - xy, room.height+xy, z), BlockFace.WEST, false);
 					
 				}
 				
 				if (room.width % 2 == 1)
 				{
-					room.corner.getRelative(room.width / 2 + 1, room.width / 2 + 1, z).setType(Material.WOOD);
+					room.corner.getRelative(room.width / 2 + 1, room.height+room.width / 2 + 1, z).setType(Material.WOOD);
 				}
 			}
 			break;
