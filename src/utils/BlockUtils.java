@@ -18,6 +18,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.material.Openable;
+import org.bukkit.material.Stairs;
 
 public class BlockUtils {
 
@@ -89,6 +90,19 @@ public class BlockUtils {
 		default:
 			return 5;
 		}
+	}
+
+	public static void setStairsData(Block stairs, BlockFace dir, boolean upsideDown)
+	{
+		BlockState state = stairs.getState();
+		MaterialData materialData = state.getData();
+		if (! (materialData instanceof Stairs)) 
+			return;
+		Stairs stairsData = (Stairs) materialData;
+		stairsData.setFacingDirection(dir);
+		stairsData.setInverted(upsideDown);
+		state.setData(stairsData);
+		state.update();	
 	}
 	
 	public static boolean isLogType(Material m) { 
