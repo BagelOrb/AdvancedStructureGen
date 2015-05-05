@@ -2,6 +2,7 @@ package utils;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
+import org.bukkit.TreeSpecies;
 
 public class MatUtils {
 
@@ -24,6 +25,18 @@ public class MatUtils {
 			str = WordUtils.capitalize(str);
 			return str;
 		}
+	}
+	
+	public static Material getStairs(TreeSpecies species) {
+		switch (species) {
+		case ACACIA: return Material.ACACIA_STAIRS;
+		case BIRCH: return Material.BIRCH_WOOD_STAIRS;
+		case DARK_OAK: return Material.DARK_OAK_STAIRS;
+		case GENERIC: return Material.WOOD_STAIRS;
+		case JUNGLE: return Material.JUNGLE_WOOD_STAIRS;
+		case REDWOOD: return Material.SPRUCE_WOOD_STAIRS;
+		}
+		return Material.WOOD_STAIRS;
 	}
 	
 	public static void main(String[] args) {

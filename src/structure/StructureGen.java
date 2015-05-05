@@ -1,6 +1,7 @@
 package structure;
 
 import org.bukkit.Material;
+import org.bukkit.TreeSpecies;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
@@ -12,7 +13,7 @@ public class StructureGen {
 		Placement.liftStructure(room);
 		Floor.setFloorMat(room, Material.WOOD);
 		
-		Roof.makeRoof(room, BlockFace.NORTH);
+		Roof.makeRoof(room, BlockFace.EAST, TreeSpecies.BIRCH);
 	}
 	
 }
