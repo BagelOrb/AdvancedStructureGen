@@ -1,0 +1,7 @@
+name: WorldGenTry
+main: main.WorldGenTry
+description: WorldGenTry descr
+version: 0.1
+author:  TK
+depend:
+commands:
