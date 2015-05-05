@@ -15,6 +15,22 @@ import utils.MatUtils;
 
 public class Roof {
 
+	
+
+	public static void setRoofMat(Room room, Material mat) {
+		for (int x = 1 ; x < room.width - 1; x++)
+			for (int z = 1; z < room.depth - 1; z++)
+				room.corner.getRelative(x, room.height - 1, z).setType(mat);
+		
+	}
+
+	public static void setRoofCheckerBoard(Room room, Material mat1, Material mat2) {
+		for (int x = 1 ; x < room.width - 1; x++)
+			for (int z = 1; z < room.depth - 1; z++)
+				room.corner.getRelative(x, room.height - 1, z).setType(((x+z) % 2 == 1)? mat1 : mat2);
+		
+	}
+	
 	public static void makeRoof(Room room, BlockFace direction, TreeSpecies species)
 	{				
 		Material stair_mat = MatUtils.getStairs(species);
@@ -168,8 +184,8 @@ public class Roof {
 				room.corner.getRelative(room.width / 2, room.height + room.width / 4, z).setType(blockType);
 			}
 			else {
-				room.corner.getRelative(room.width / 2, room.height + room.width / 4, z).setType(blockType);
-				room.corner.getRelative(room.width / 2 + 1, room.height + room.width / 4, z).setType(blockType);
+				room.corner.getRelative(room.width / 2, room.height + room.width / 4 - 1, z).setType(blockType);
+				room.corner.getRelative(room.width / 2 - 1, room.height + room.width / 4 - 1, z).setType(blockType);
 			}
 			break;
 		}
@@ -186,8 +202,8 @@ public class Roof {
 				room.corner.getRelative(x, room.height + room.depth / 4, room.depth / 2).setType(blockType);
 			}
 			else {
-				room.corner.getRelative(x, room.height + room.depth / 4, room.depth / 2).setType(blockType);
-				room.corner.getRelative(x, room.height + room.depth / 4, room.depth / 2 + 1).setType(blockType);
+				room.corner.getRelative(x, room.height + room.depth / 4 - 1, room.depth / 2).setType(blockType);
+				room.corner.getRelative(x, room.height + room.depth / 4 - 1, room.depth / 2 - 1).setType(blockType);
 			}
 			break;
 		}
