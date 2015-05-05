@@ -7,10 +7,8 @@ public class StructureGen {
 
 	public static void generate(Block location) {
 		int w=5, h=5, d=5;
-		Room room = new Room(w, h, d);
-		int lift = Placement.getStructureLift(room);
-		Block corner = location.getRelative(0, lift, 0);
-		room.corner = corner;
+		Room room = new Room(location, w, h, d);
+		Placement.liftStructure(room);
 		Floor.setFloorMat(room, Material.STONE);
 	}
 	
