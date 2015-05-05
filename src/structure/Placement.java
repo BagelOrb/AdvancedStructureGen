@@ -5,11 +5,11 @@ import org.bukkit.block.Block;
 public class Placement {
 
 	
-	public static int getStructureLift(Block block, int width, int height, int depth)
+	public static int getStructureLift(Room room)
 	{
 		for (int lift = 0; lift < 10; lift++)
 		{
-			if (isFree(block.getRelative(0, lift, 0), width, height, depth)) return lift;
+			if (isFree(room.corner.getRelative(0, lift, 0), room.width, room.height, room.depth)) return lift;
 		
 		}
 		

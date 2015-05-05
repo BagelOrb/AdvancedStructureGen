@@ -2,7 +2,6 @@ package main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.plugin.PluginManager;
 import com.massivecraft.massivecore.MassivePlugin;
 
 import commands.CmdASG;
@@ -28,7 +27,7 @@ public class AdvancedStructureGen extends MassivePlugin {
 		defaultWorld = Bukkit.getServer().getWorld("world");
 
 
-		PluginManager pm = getServer().getPluginManager();
+//		PluginManager pm = getServer().getPluginManager();
 //		pm.registerEvents(this.AllListener, this);		
 		outerCommand = new CmdASG();
 		outerCommand.register(getCurrentPlugin());
