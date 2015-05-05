@@ -8,21 +8,24 @@ import org.bukkit.block.BlockFace;
 public class StructureGen {
 
 	public static void generate(Block location) {
-		int w=7, h=7, d=9;
+		int w=8, h=4, d=6;
 		Room room = new Room(location, w, h, d);
 		Placement.liftStructure(room);
 		Floor.setFloorMat(room, Material.WOOD);
 		
+		Roof.makeRoof(room, BlockFace.NORTH, TreeSpecies.BIRCH);
+		Roof.makeRoofSide(room, BlockFace.NORTH, Material.SMOOTH_BRICK, true);
+		Roof.makeRoofWindow(room, BlockFace.NORTH, Material.GLASS);
+		
+		room.wallNorth.setWallMat(Material.SMOOTH_BRICK);
+		room.wallEast.setWallMat(Material.SMOOTH_BRICK);
+		room.wallSouth.setWallMat(Material.SMOOTH_BRICK);
+		room.wallWest.setWallMat(Material.SMOOTH_BRICK);
+		
+		room.setWallCornersMat(Material.SMOOTH_BRICK);
+
 		Roof.makeRoof(room, BlockFace.EAST, TreeSpecies.BIRCH);
-		Roof.makeRoofSide(room, BlockFace.EAST, Material.SMOOTH_BRICK, true);
-		Roof.makeRoofWindow(room, BlockFace.EAST, Material.GLASS);
-		
-		Wall.setWallMat(room, BlockFace.NORTH, Material.COBBLESTONE);
-		Wall.setWallMat(room, BlockFace.EAST, Material.COBBLESTONE);
-		Wall.setWallMat(room, BlockFace.SOUTH, Material.COBBLESTONE);
-		Wall.setWallMat(room, BlockFace.WEST, Material.COBBLESTONE);
-		Wall.setWallCornersMat(room, Material.LOG);
-		
+
 	}
 	
 }
