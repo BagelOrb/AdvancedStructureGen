@@ -22,6 +22,8 @@ public class StructureGen {
 		room.wallSouth.setWallMat(Material.SMOOTH_BRICK);
 		room.wallWest.setWallMat(Material.SMOOTH_BRICK);
 		
+		room.wallNorth.createDoor(Material.WOOD_DOOR, Material.WOOD, 3);
+		
 		room.setWallCornersMat(Material.SMOOTH_BRICK);
 
 		Roof.makeRoof(room, BlockFace.EAST, TreeSpecies.BIRCH);
