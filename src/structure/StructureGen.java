@@ -13,9 +13,11 @@ public class StructureGen {
 		Placement.liftStructure(room);
 		Floor.setFloorMat(room, Material.WOOD);
 		
-		Roof.makeRoof(room, BlockFace.NORTH, TreeSpecies.BIRCH);
-		Roof.makeRoofSide(room, BlockFace.NORTH, Material.SMOOTH_BRICK, true);
-		Roof.makeRoofWindow(room, BlockFace.NORTH, Material.GLASS);
+		Roof.makeRoof(room, BlockFace.EAST, TreeSpecies.BIRCH);
+		Roof.makeRoofSide(room, BlockFace.EAST, Material.SMOOTH_BRICK, true);
+		Roof.makeRoofWindow(room, BlockFace.EAST, Material.FENCE);
+		Roof.makeRoofSide(room, BlockFace.WEST, Material.SMOOTH_BRICK, true);
+		Roof.makeRoofWindow(room, BlockFace.WEST, Material.FENCE);
 		
 		room.wallNorth.setWallMat(Material.SMOOTH_BRICK);
 		room.wallEast.setWallMat(Material.SMOOTH_BRICK);
@@ -23,8 +25,6 @@ public class StructureGen {
 		room.wallWest.setWallMat(Material.SMOOTH_BRICK);
 		
 		room.setWallCornersMat(Material.SMOOTH_BRICK);
-
-		Roof.makeRoof(room, BlockFace.EAST, TreeSpecies.BIRCH);
 
 	}
 	

@@ -168,8 +168,8 @@ public class Roof {
 				room.corner.getRelative(room.width / 2, room.height + room.width / 4, z).setType(blockType);
 			}
 			else {
-				room.corner.getRelative(room.width / 2, room.height + room.width / 4, z).setType(blockType);
-				room.corner.getRelative(room.width / 2 + 1, room.height + room.width / 4, z).setType(blockType);
+				room.corner.getRelative(room.width / 2, room.height + room.width / 4 - 1, z).setType(blockType);
+				room.corner.getRelative(room.width / 2 - 1, room.height + room.width / 4 - 1, z).setType(blockType);
 			}
 			break;
 		}
@@ -186,8 +186,8 @@ public class Roof {
 				room.corner.getRelative(x, room.height + room.depth / 4, room.depth / 2).setType(blockType);
 			}
 			else {
-				room.corner.getRelative(x, room.height + room.depth / 4, room.depth / 2).setType(blockType);
-				room.corner.getRelative(x, room.height + room.depth / 4, room.depth / 2 + 1).setType(blockType);
+				room.corner.getRelative(x, room.height + room.depth / 4 - 1, room.depth / 2).setType(blockType);
+				room.corner.getRelative(x, room.height + room.depth / 4 - 1, room.depth / 2 - 1).setType(blockType);
 			}
 			break;
 		}
