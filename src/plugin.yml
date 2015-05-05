@@ -4,4 +4,7 @@ description: AdvancedStructureGen descr
 version: 0.1
 author: JB & TK
 depend:
+ - MassiveCore
 commands:
+ asg:
+  description: Use /asg to do AdvancedStructureGen stuff.
