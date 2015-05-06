@@ -69,16 +69,7 @@ public class MatUtils {
 	public static void main(String[] args) {
 		System.out.println(prettyPrint(Material.BAKED_POTATO));
 	}
-	
-	public static enum MatType {
-//		ORE(new SetMat(null, this));
-//		
-//		private Mat mat;
-//
-//		MatType(Mat mat) {
-//			this.mat = mat;
-//		}
-	}
+
 
 
 

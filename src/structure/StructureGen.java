@@ -1,11 +1,12 @@
 package structure;
 
 import org.bukkit.Material;
-import org.bukkit.TreeSpecies;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import utils.MatState;
 import utils.MatStateUtils;
+import utils.MatStateUtils.MatType;
 
 public class StructureGen {
 
@@ -14,11 +15,11 @@ public class StructureGen {
 		Placement.liftStructure(room);
 		Floor.setFloorMat(room, Material.WOOD);
 		
-		Roof.makeRoof(room, roofDir, TreeSpecies.BIRCH);
-		Roof.makeRoofSide(room, roofDir, Material.SMOOTH_BRICK, true);
-		Roof.makeRoofWindow(room, roofDir, Material.FENCE);
-		Roof.makeRoofSide(room, roofDir.getOppositeFace(), Material.SMOOTH_BRICK, true);
-		Roof.makeRoofWindow(room, roofDir.getOppositeFace(), Material.FENCE);
+		Roof.makeRoof(room, roofDir, MatType.Birch);
+		Roof.makeRoofSide(room, roofDir, MatType.StoneBricks, true);
+		Roof.makeRoofWindow(room, roofDir, new MatState(Material.FENCE, 0));
+		Roof.makeRoofSide(room, roofDir.getOppositeFace(), MatType.StoneBricks, true);
+		Roof.makeRoofWindow(room, roofDir.getOppositeFace(), new MatState(Material.FENCE, 0));
 		//Roof.setRoofCheckerBoard(room, Material.GOLD_BLOCK, Material.LAPIS_BLOCK);
 		
 		room.wallNorth.setWallMat(Material.SMOOTH_BRICK);
