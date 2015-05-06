@@ -2,6 +2,8 @@ package structure;
 
 import java.util.ArrayList;
 
+import main.Debug;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -16,9 +18,20 @@ public class Wall {
 		this.room = room;
 		this.direction = wallDirection;
 	}
+
+	public void createDoubleDoor(Material doorMaterial, Material floorMaterial, int offSet)
+	{
+		createDoor(doorMaterial, floorMaterial, offSet, (this.direction==BlockFace.NORTH || this.direction==BlockFace.EAST));
+		createDoor(doorMaterial, floorMaterial, offSet + 1, (this.direction==BlockFace.SOUTH || this.direction==BlockFace.WEST));
+	}
+	
+	public void createDoor(Material doorMaterial, Material floorMaterial, int offSet)
+	{
+		createDoor(doorMaterial, floorMaterial, offSet, false);
+	}
 	
 	@SuppressWarnings("deprecation")
-	public void createDoor(Material doorMaterial, Material floorMaterial, int offSet, boolean hingeRight)
+	private void createDoor(Material doorMaterial, Material floorMaterial, int offSet, boolean hingeRight)
 	{
 		Block doorTop = null;
 		Block doorBottom = null;
@@ -59,6 +72,7 @@ public class Wall {
 			break;
 			
 		default:
+			Debug.err("Cannot make door in direction "+ this.direction);	
 			break;
 		}
 		
@@ -100,6 +114,7 @@ public class Wall {
 			break;
 			
 		default:
+			Debug.err("Cannot make wall in direction "+ this.direction);	
 			break;
 		}
 		
