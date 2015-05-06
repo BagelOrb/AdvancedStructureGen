@@ -38,13 +38,11 @@ public class Wall {
 		
 		case NORTH:
 		case SOUTH:
-			Debug.msg("NORTH or SOUTH!");
 			widthOrDepth = room.width;
 			break;
 			
 		case EAST:		
 		case WEST:
-			Debug.msg("EAST or WEST!");
 			widthOrDepth = room.depth;	
 			break;
 			
@@ -53,24 +51,29 @@ public class Wall {
 			break;
 		}
 		
-		Debug.msg("widthOrDepth: " + widthOrDepth);
+		if(widthOrDepth <= 4) return; 	// Too small
+		if(room.height <= 4) return;	// Too low
 		
-		if(widthOrDepth <= 4) return;
-		if(room.height <= 4) return;
-		
-		for(int xory = 1; xory < widthOrDepth / 2 - 1; xory = xory+2)
+		for(int xorz = 1; xorz < widthOrDepth / 2 - 1; xorz = xorz+2)
 		{			
-			createWindow(windowMaterial, xory);
-			createWindow(windowMaterial, widthOrDepth - xory - 3);	
+			for(int y = 2; y < room.height - 1; y = y+3)
+			{
+				createWindow(windowMaterial, xorz, y);
+				createWindow(windowMaterial, widthOrDepth - xorz - 3, y);	
+			}
 		}
 		
-		if(widthOrDepth == 5 || (widthOrDepth % 2 == 1 && widthOrDepth % 3 == 0)) // Uneven en deelbaar door 3
+		if(widthOrDepth % 4 == 1)
 		{
-			createWindow(windowMaterial, widthOrDepth / 2 - 1); 
+			for(int y = 2; y < room.height - 1; y = y+3)
+			{
+				createWindow(windowMaterial, widthOrDepth / 2 - 1, y); 
+			}
 		}
 
 	}
 	
+	@SuppressWarnings("unused")
 	private void createWindow(Material windowMaterial, int offSet)
 	{
 		createWindow(windowMaterial, offSet, 2);

@@ -50,7 +50,7 @@ public class CmdASGDebug extends ASGCommand{
 			if (integerArg == 2)
 			{
 				Block loc = player.getWorld().getBlockAt(player.getLocation());
-				StructureGen.generate2(loc, 11, 5, 12, BlockFace.EAST);
+				StructureGen.generate2(loc, 11, 15, 12, BlockFace.EAST);
 
 			}
 			else if (integerArg == 3)
@@ -62,7 +62,7 @@ public class CmdASGDebug extends ASGCommand{
 			else if (integerArg == 4)
 			{
 				Block loc = player.getWorld().getBlockAt(player.getLocation());
-				StructureGen.generate2(loc, 5, 5, 3, BlockFace.SOUTH);
+				StructureGen.generate2(loc, 5, 6, 3, BlockFace.SOUTH);
 
 			}
 			else if (integerArg == 5)
