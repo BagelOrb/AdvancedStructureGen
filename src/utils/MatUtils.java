@@ -38,7 +38,18 @@ public class MatUtils {
 		}
 		return Material.WOOD_STAIRS;
 	}
-	
+
+//	public static Material getBlock(TreeSpecies species) {
+//		switch (species) {
+//		case ACACIA: return Material.ACACIA;
+//		case BIRCH: return Material.BIRCH_WOOD_STAIRS;
+//		case DARK_OAK: return Material.DARK_OAK_STAIRS;
+//		case GENERIC: return Material.WOOD_STAIRS;
+//		case JUNGLE: return Material.JUNGLE_WOOD_STAIRS;
+//		case REDWOOD: return Material.SPRUCE_WOOD_STAIRS;
+//		}
+//		return Material.WOOD;
+//	}
 
 	public static Material getStairs(Material blockType) {
 		switch(blockType) {
@@ -68,6 +79,7 @@ public class MatUtils {
 //			this.mat = mat;
 //		}
 	}
+
 
 
 }
