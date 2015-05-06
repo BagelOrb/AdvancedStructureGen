@@ -20,7 +20,6 @@ public class StructureGen {
 		Placement.liftStructure(room);
 		room.style = PrefabStyles.demacianStyle();
 		room.make();
-
 	}
 	public static void generate2(Block location, int w, int h, int d, BlockFace roofDir) {
 		Room room = new Room(location, w, h, d);

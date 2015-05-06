@@ -14,10 +14,10 @@ public class PrefabStyles {
 		ret.floorStyle = new FloorStyle(new MatShape(MatType.Birch, Shape.Block).getMatState());
 		ret.wallStyle = new WallStyle(
 				MatType.StoneBricks, 
-				new MatShape(MatType.StoneBricks, Shape.Block).getMatState(), 
+				new MatState(Material.DOUBLE_STEP), //new MatShape(MatType.StoneBricks, Shape.Block).getMatState(), 
 				new MatState(Material.FENCE), 
 				Material.WOODEN_DOOR, 
-				Material.DOUBLE_STONE_SLAB2);
+				Material.DOUBLE_STEP);
 		ret.roofStyle = new RoofStyle(MatType.Birch, true, new MatState(Material.FENCE), RoofSideType.Kantelen);
 		return ret;
 	}
