@@ -4,6 +4,10 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import room.Floor;
+import room.Placement;
+import room.Roof;
+import room.Room;
 import utils.MatState;
 import utils.MatStateUtils;
 import utils.MatStateUtils.MatType;

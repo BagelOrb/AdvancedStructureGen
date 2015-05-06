@@ -1,4 +1,4 @@
-package structure;
+package room;
 
 
 import main.Debug;
