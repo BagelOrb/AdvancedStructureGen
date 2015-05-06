@@ -53,6 +53,18 @@ public class CmdASGDebug extends ASGCommand{
 				StructureGen.generate(loc, 7, 5, 6, BlockFace.EAST);
 
 			}
+			else if (integerArg == 3)
+			{
+				Block loc = player.getWorld().getBlockAt(player.getLocation());
+				StructureGen.generate2(loc, 7, 5, 6, BlockFace.EAST);
+
+			}
+			else if (integerArg == 4)
+			{
+				Block loc = player.getWorld().getBlockAt(player.getLocation());
+				StructureGen.generate2(loc, 7, 5, 6, BlockFace.SOUTH);
+
+			}
 			else {
 				Block loc = player.getWorld().getBlockAt(player.getLocation());
 				StructureGen.generate(loc, 7, 5, 6, BlockFace.NORTH);

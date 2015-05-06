@@ -27,5 +27,21 @@ public class StructureGen {
 		room.setWallCornersMat(Material.SMOOTH_BRICK);
 
 	}
+	public static void generate2(Block location, int w, int h, int d, BlockFace roofDir) {
+		Room room = new Room(location, w, h, d);
+		Placement.liftStructure(room);
+		Floor.setFloorMat(room, Material.WOOD);
+		
+		Roof.setRoofCheckerBoard(room, Material.GOLD_BLOCK, Material.LAPIS_BLOCK);
+		Roof.kantelen(room, Material.SMOOTH_BRICK);
+		
+		room.wallNorth.setWallMat(Material.SMOOTH_BRICK);
+		room.wallEast.setWallMat(Material.SMOOTH_BRICK);
+		room.wallSouth.setWallMat(Material.SMOOTH_BRICK);
+		room.wallWest.setWallMat(Material.SMOOTH_BRICK);
+		
+		room.setWallCornersMat(Material.SMOOTH_BRICK);
+
+	}
 	
 }
