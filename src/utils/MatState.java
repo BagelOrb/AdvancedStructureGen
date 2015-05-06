@@ -9,16 +9,16 @@ import org.bukkit.block.Block;
  * @author TK
  *
  */
-public class BlockMatState {
+public class MatState {
 
 	public final Material mat;
 	public final byte data;
 	
-	public BlockMatState (Material mat2, byte data2) {
+	public MatState (Material mat2, byte data2) {
 		this.mat = mat2;
 		this.data = data2;
 	}
-	public BlockMatState (Material mat2, int data2) {
+	public MatState (Material mat2, int data2) {
 		this.mat = mat2;
 		this.data = (byte) data2;
 	}

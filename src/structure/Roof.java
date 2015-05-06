@@ -11,7 +11,10 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.WoodenStep;
 
 import utils.BlockUtils;
+import utils.MatStateUtils;
+import utils.MatStateUtils.MatShape;
 import utils.MatUtils;
+import utils.MatStateUtils.Shape;
 
 public class Roof {
 
@@ -31,56 +34,50 @@ public class Roof {
 		
 	}
 	
-	public static void kantelen(Room room, Material mat) {
+	public static void kantelen(Room room, MatStateUtils.MatType matType) {
 		
-		kantelen_NS(room.corner.getRelative(0, room.height, 0), room.depth, mat);
-		kantelen_NS(room.corner.getRelative(room.width - 1, room.height, 0), room.depth, mat);
+		kantelen_NS(room.corner.getRelative(0, room.height, 0), room.depth, matType);
+		kantelen_NS(room.corner.getRelative(room.width - 1, room.height, 0), room.depth, matType);
 		
-		kantelen_EW(room.corner.getRelative(0, room.height, 0), room.width, mat);
-		kantelen_EW(room.corner.getRelative(0, room.height, room.depth - 1), room.width, mat);
+		kantelen_EW(room.corner.getRelative(0, room.height, 0), room.width, matType);
+		kantelen_EW(room.corner.getRelative(0, room.height, room.depth - 1), room.width, matType);
 		
 	}
-	public static void kantelen_NS(Block rel, int length, Material mat) {
-
-		rel.getRelative(0, 0, 0).setType(mat);
-		rel.getRelative(0, 0, length - 1).setType(mat);
+	public static void kantelen_NS(Block rel, int length, MatStateUtils.MatType mat) {
+		MatShape stairs = new MatShape(mat, Shape.Stairs);
+		MatShape block = new MatShape(mat, Shape.Block);
 		
-		Material stairs_mat = MatUtils.getStairs(mat);
+		block.getMatState().setBlock(rel.getRelative(0, 0, 0));
+		block.getMatState().setBlock(rel.getRelative(0, 0, length - 1));
+		
 		for (int z = 1; z < length / 2; z++)
 		{
-			Block one = rel.getRelative(0, 0, z);
-			one.setType(stairs_mat);
-			BlockUtils.setStairsData(one, BlockFace.SOUTH, false);
+			stairs.getMatState(BlockFace.SOUTH, false).setBlock(rel.getRelative(0, 0, z));
 
-			Block two = rel.getRelative(0, 0, length - 1 - z);
-			two.setType(stairs_mat);
-			BlockUtils.setStairsData(two, BlockFace.NORTH, false);
+			stairs.getMatState(BlockFace.NORTH, false).setBlock(rel.getRelative(0, 0, length - 1 - z));
 		}
 		if (length % 2 == 1)
 		{
-			rel.getRelative(0, 0, length / 2).setType(mat);
+			block.getMatState().setBlock(rel.getRelative(0, 0, length / 2));
 		}
 	}
 
-	public static void kantelen_EW(Block rel, int length, Material mat) {
-
-		rel.getRelative(0, 0, 0).setType(mat);
-		rel.getRelative(length - 1, 0, 0).setType(mat);
+	public static void kantelen_EW(Block rel, int length, MatStateUtils.MatType mat) {
+		MatShape stairs = new MatShape(mat, Shape.Stairs);
+		MatShape block = new MatShape(mat, Shape.Block);
 		
-		Material stairs_mat = MatUtils.getStairs(mat);
+		block.getMatState().setBlock(rel.getRelative(0, 0, 0));
+		block.getMatState().setBlock(rel.getRelative(length - 1, 0, 0));
+		
 		for (int x = 1; x < length / 2; x++)
 		{
-			Block one = rel.getRelative(x, 0, 0);
-			one.setType(stairs_mat);
-			BlockUtils.setStairsData(one, BlockFace.EAST, false);
+			stairs.getMatState(BlockFace.EAST, false).setBlock(rel.getRelative(x, 0, 0));
 
-			Block two = rel.getRelative(length - 1 - x, 0, 0);
-			two.setType(stairs_mat);
-			BlockUtils.setStairsData(two, BlockFace.WEST, false);
+			stairs.getMatState(BlockFace.WEST, false).setBlock(rel.getRelative(length - 1 - x, 0, 0));
 		}
 		if (length % 2 == 1)
 		{
-			rel.getRelative(length / 2, 0, 0).setType(mat);
+			block.getMatState().setBlock(rel.getRelative(length / 2, 0, 0));
 		}
 	}
 	

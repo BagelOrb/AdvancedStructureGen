@@ -5,6 +5,8 @@ import org.bukkit.TreeSpecies;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import utils.MatStateUtils;
+
 public class StructureGen {
 
 	public static void generate(Block location, int w, int h, int d, BlockFace roofDir) {
@@ -33,7 +35,7 @@ public class StructureGen {
 		Floor.setFloorMat(room, Material.WOOD);
 		
 		Roof.setRoofCheckerBoard(room, Material.GOLD_BLOCK, Material.LAPIS_BLOCK);
-		Roof.kantelen(room, Material.SMOOTH_BRICK);
+		Roof.kantelen(room, MatStateUtils.MatType.StoneBricks);
 		
 		room.wallNorth.setWallMat(Material.SMOOTH_BRICK);
 		room.wallEast.setWallMat(Material.SMOOTH_BRICK);
