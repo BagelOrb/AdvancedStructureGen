@@ -39,11 +39,11 @@ public class StructureGen {
 		room.wallEast.setWallMat(Material.SMOOTH_BRICK);
 		room.wallSouth.setWallMat(Material.SMOOTH_BRICK);
 		room.wallWest.setWallMat(Material.SMOOTH_BRICK);
-		
-		room.wallNorth.createDoor(Material.WOODEN_DOOR, Material.WOOD, 2);
-		room.wallEast.createDoubleDoor(Material.WOODEN_DOOR, Material.WOOD, 1);
-		room.wallSouth.createDoor(Material.WOODEN_DOOR, Material.WOOD, 2);
-		room.wallWest.createDoubleDoor(Material.WOODEN_DOOR, Material.WOOD, 1);
+	
+		room.wallNorth.generateWindows(Material.FENCE);
+		room.wallEast.generateWindows(Material.FENCE);
+		room.wallSouth.generateWindows(Material.FENCE);
+		room.wallWest.generateWindows(Material.FENCE);
 		
 		room.setWallCornersMat(Material.SMOOTH_BRICK);
 
