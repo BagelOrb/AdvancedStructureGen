@@ -11,6 +11,8 @@ public class Room {
 	public Room(Block cornerBlock, int w, int h, int d) { 
 			width = w; height = h; depth = d; corner = cornerBlock; 
 			
+			clear_inside(); 
+			
 			wallNorth = new Wall(this, BlockFace.NORTH);
 			wallEast = new Wall(this, BlockFace.EAST);
 			wallSouth = new Wall(this, BlockFace.SOUTH);
@@ -18,6 +20,20 @@ public class Room {
 		
 		}
 	public Room(int w, int h, int d) { width = w; height = h; depth = d; }
+	
+	public void clear() {
+		for (int x = 0; x < width; x++)
+			for (int y = 0 ; y < height; y++)
+				for (int z = 0; z < depth; z++)
+					corner.getRelative(x, y, z).setType(Material.AIR);
+	}
+	
+	public void clear_inside() {
+		for (int x = 1; x < width - 1; x++)
+			for (int y = 1; y < height - 1; y++)
+				for (int z = 1; z < depth - 1; z++)
+					corner.getRelative(x, y, z).setType(Material.AIR);
+	}
 	
 	public void setWallCornersMat(Material mat) {
 
@@ -34,4 +50,5 @@ public class Room {
 			this.corner.getRelative(this.width -1, y, this.depth -1).setType(mat);
 		
 	}
+	
 }

@@ -51,5 +51,9 @@ public class StructureGen {
 		room.setWallCornersMat(Material.SMOOTH_BRICK);
 
 	}
+	public static void generate3(Block location, int w, int h, int d, BlockFace roofDir) {
+		generate2(location, w, h, d, roofDir);
+		generate(location.getRelative(0, h, 0), w, h, d, roofDir);
+	}
 	
 }

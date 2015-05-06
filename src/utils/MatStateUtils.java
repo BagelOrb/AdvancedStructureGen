@@ -8,7 +8,7 @@ public class MatStateUtils {
 	public static enum Shape { Block, Step, Stairs };
 	public static enum MatType { 
 		Oak(true), Spruce(true), Birch(true), Jungle(true), Acacia(true), DarkOak(true), // wood types 
-		Cobble(false), StoneBricks(false), Stone(false), Quartz(false), SandStone(false), NetherBrick(false), Brick(false); // stone types
+		Cobble(false), MossyCobble(false), StoneBricks(false), Stone(false), Quartz(false), SandStone(false), NetherBrick(false), Brick(false); // stone types
 		public boolean isWoodType;
 		MatType(boolean isWood) { isWoodType = isWood; };
 	};
@@ -17,10 +17,14 @@ public class MatStateUtils {
 	{
 		MatType matType;
 		Shape shape;
-		public MatShape(MatType matType, Shape shape) { this.matType = matType; this.shape = shape; }
+		BlockFace stairDirection;
+		boolean upsideDown;
+		public MatShape(MatType matType, Shape shape) { this.matType = matType; this.shape = shape; this.stairDirection = BlockFace.DOWN; this.upsideDown = false; }
+		public MatShape(MatType matType, Shape shape, boolean upsideDown) { this.matType = matType; this.shape = shape; this.stairDirection = BlockFace.DOWN; this.upsideDown = upsideDown; }
+		public MatShape(MatType matType, Shape shape, BlockFace stairDirection, boolean upsideDown) { this.matType = matType; this.shape = shape; this.stairDirection = stairDirection; this.upsideDown = upsideDown; }
 		public MatState getMatState(BlockFace dir, boolean upperHalf) { return MatStateUtils.getMatState(matType, shape, dir, upperHalf); }
-		public MatState getMatState(boolean upperHalf) { return MatStateUtils.getMatState(matType, shape, BlockFace.DOWN, upperHalf); }
-		public MatState getMatState() { return MatStateUtils.getMatState(matType, shape, BlockFace.DOWN, false); }
+		public MatState getMatState(boolean upperHalf) { return MatStateUtils.getMatState(matType, shape, stairDirection, upperHalf); }
+		public MatState getMatState() { return MatStateUtils.getMatState(matType, shape, stairDirection, upsideDown); }
 	}
 	
 	public static MatState getMatState(MatType matType, Shape shape, BlockFace dir, boolean upperHalf) {
@@ -67,6 +71,7 @@ public class MatStateUtils {
 		case STEP:
 			switch(matType) {
 			case Brick:			data = 4; break;
+			case MossyCobble:
 			case Cobble:		data = 3; break;
 			case NetherBrick:	data = 6; break;
 			case Quartz:		data = 7; break;
@@ -92,6 +97,7 @@ public class MatStateUtils {
 			{
 				switch(matType) {
 				case Brick:			return Material.BRICK;
+				case MossyCobble:	return Material.MOSSY_COBBLESTONE;
 				case Cobble:		return Material.COBBLESTONE;
 				case NetherBrick:	return Material.NETHER_BRICK;
 				case Quartz:		return Material.QUARTZ;
@@ -112,6 +118,7 @@ public class MatStateUtils {
 				case Oak: 		return Material.WOOD_STAIRS; 
 				case Spruce: 	return Material.SPRUCE_WOOD_STAIRS;
 				case Brick:		return Material.BRICK_STAIRS;
+				case MossyCobble:
 				case Cobble:	return Material.COBBLESTONE_STAIRS;
 				case NetherBrick:return Material.NETHER_BRICK_STAIRS;
 				case Quartz:	return Material.QUARTZ_STAIRS;
