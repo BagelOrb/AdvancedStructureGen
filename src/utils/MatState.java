@@ -23,6 +23,10 @@ public class MatState {
 		this.data = (byte) data2;
 	}
 	
+	public MatState(Material mat) {
+		this.mat = mat;
+		data = 0;
+	}
 	@SuppressWarnings("deprecation")
 	public boolean isMetBy(Block block){
 		if (block.getType() != mat) return false;

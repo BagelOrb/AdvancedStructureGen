@@ -3,7 +3,6 @@ package room;
 
 import main.Debug;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
@@ -15,21 +14,23 @@ import utils.MatStateUtils.Shape;
 
 public class Roof {
 
-	
-
-	public static void setRoofMat(Room room, Material mat) {
+	public static void setRoofMat(Room room, MatState mat) {
 		for (int x = 1 ; x < room.width - 1; x++)
 			for (int z = 1; z < room.depth - 1; z++)
-				room.corner.getRelative(x, room.height - 1, z).setType(mat);
+				mat.setBlock(room.corner.getRelative(x, room.height - 1, z));
 		
 	}
 
-	public static void setRoofCheckerBoard(Room room, Material mat1, Material mat2) {
+	public static void setRoofCheckerBoard(Room room, MatState mat1, MatState mat2) {
 		for (int x = 1 ; x < room.width - 1; x++)
 			for (int z = 1; z < room.depth - 1; z++)
-				room.corner.getRelative(x, room.height - 1, z).setType(((x+z) % 2 == 1)? mat1 : mat2);
+				if ((x+z) % 2 == 1)
+					mat1.setBlock(room.corner.getRelative(x, room.height - 1, z));
+				else 
+					mat2.setBlock(room.corner.getRelative(x, room.height - 1, z));
 		
 	}
+
 	
 	public static void kantelen(Room room, MatStateUtils.MatType matType) {
 		

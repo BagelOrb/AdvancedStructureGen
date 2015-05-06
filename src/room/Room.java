@@ -4,20 +4,26 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import styles.Style;
+import utils.MatStateUtils.MatType;
+
 public class Room {
+	public Style style;
+	BlockFace roofDir;
+	
 	public int width, height, depth;
 	public Block corner;
 	public Wall wallNorth, wallEast, wallSouth, wallWest;
 	public Room(Block cornerBlock, int w, int h, int d) { 
 			width = w; height = h; depth = d; corner = cornerBlock; 
 			
-			clear_inside(); 
 			
 			wallNorth = new Wall(this, BlockFace.NORTH);
 			wallEast = new Wall(this, BlockFace.EAST);
 			wallSouth = new Wall(this, BlockFace.SOUTH);
 			wallWest = new Wall(this, BlockFace.WEST);
 		
+			roofDir = BlockFace.NORTH; // TODO change!
 		}
 	public Room(int w, int h, int d) { width = w; height = h; depth = d; }
 	
@@ -48,6 +54,45 @@ public class Room {
 		
 		for (int y = 0; y < this.height; y++)
 			this.corner.getRelative(this.width -1, y, this.depth -1).setType(mat);
+		
+	}
+	
+	public void make()
+	{
+		clear_inside(); 
+		
+		switch (style.floorStyle.floorFillType) 
+		{
+		case CheckerBoard:
+			Floor.setFloorCheckerBoard(this, style.floorStyle.mat, style.floorStyle.mat2);
+		case Normal:
+			Floor.setFloorMat(this, style.floorStyle.mat);
+		}
+		
+		if (roofDir != BlockFace.DOWN)
+		{
+			Roof.makeRoof(this, roofDir, MatType.Birch);
+			
+			switch (style.roofStyle.roofType) {
+			case HouseStyle:
+				Roof.makeRoofSide(this, roofDir, style.wallStyle.basicMat, true);
+				Roof.makeRoofWindow(this, roofDir, style.wallStyle.windowMat);
+				Roof.makeRoofSide(this, roofDir.getOppositeFace(), style.wallStyle.basicMat, true);
+				Roof.makeRoofWindow(this, roofDir.getOppositeFace(), style.wallStyle.windowMat);
+				break;
+			case Kantelen:
+				Roof.setRoofMat(this, style.floorStyle.mat); // TODO separatew flat roof mat in style!
+				Roof.kantelen(this, style.wallStyle.basicMat);
+				break;
+			}
+		}
+		
+		wallNorth.setWallMat(Material.SMOOTH_BRICK);
+		wallEast.setWallMat(Material.SMOOTH_BRICK);
+		wallSouth.setWallMat(Material.SMOOTH_BRICK);
+		wallWest.setWallMat(Material.SMOOTH_BRICK);
+		
+		setWallCornersMat(style.wallStyle.cornerBlocks.mat); // TODO: make function accept MatState instead of Material
 		
 	}
 	
