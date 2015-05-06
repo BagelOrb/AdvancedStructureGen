@@ -31,9 +31,63 @@ public class Roof {
 		
 	}
 	
+	public static void kantelen(Room room, Material mat) {
+		
+		kantelen_NS(room.corner.getRelative(0, room.height, 0), room.depth, mat);
+		kantelen_NS(room.corner.getRelative(room.width - 1, room.height, 0), room.depth, mat);
+		
+		kantelen_EW(room.corner.getRelative(0, room.height, 0), room.width, mat);
+		kantelen_EW(room.corner.getRelative(0, room.height, room.depth - 1), room.width, mat);
+		
+	}
+	public static void kantelen_NS(Block rel, int length, Material mat) {
+
+		rel.getRelative(0, 0, 0).setType(mat);
+		rel.getRelative(0, 0, length - 1).setType(mat);
+		
+		Material stairs_mat = MatUtils.getStairs(mat);
+		for (int z = 1; z < length / 2; z++)
+		{
+			Block one = rel.getRelative(0, 0, z);
+			one.setType(stairs_mat);
+			BlockUtils.setStairsData(one, BlockFace.SOUTH, false);
+
+			Block two = rel.getRelative(0, 0, length - 1 - z);
+			two.setType(stairs_mat);
+			BlockUtils.setStairsData(two, BlockFace.NORTH, false);
+		}
+		if (length % 2 == 1)
+		{
+			rel.getRelative(0, 0, length / 2).setType(mat);
+		}
+	}
+
+	public static void kantelen_EW(Block rel, int length, Material mat) {
+
+		rel.getRelative(0, 0, 0).setType(mat);
+		rel.getRelative(length - 1, 0, 0).setType(mat);
+		
+		Material stairs_mat = MatUtils.getStairs(mat);
+		for (int x = 1; x < length / 2; x++)
+		{
+			Block one = rel.getRelative(x, 0, 0);
+			one.setType(stairs_mat);
+			BlockUtils.setStairsData(one, BlockFace.EAST, false);
+
+			Block two = rel.getRelative(length - 1 - x, 0, 0);
+			two.setType(stairs_mat);
+			BlockUtils.setStairsData(two, BlockFace.WEST, false);
+		}
+		if (length % 2 == 1)
+		{
+			rel.getRelative(length / 2, 0, 0).setType(mat);
+		}
+	}
+	
+
 	public static void makeRoof(Room room, BlockFace direction, TreeSpecies species)
 	{				
-		Material stair_mat = MatUtils.getStairs(species);
+		Material stairs_mat = MatUtils.getStairs(species);
 		switch (direction)
 		{
 		case NORTH:
@@ -43,12 +97,23 @@ public class Roof {
 				for (int xy = 0; xy < room.width/2; xy++)
 				{
 					Block one = room.corner.getRelative(xy, room.height+xy, z); 
-					one.setType(stair_mat);
+					one.setType(stairs_mat);
 					BlockUtils.setStairsData(one, BlockFace.EAST, false);
-
+					
 					Block two = room.corner.getRelative(room.width - 1 - xy, room.height+xy, z); 
-					two.setType(stair_mat);
+					two.setType(stairs_mat);
 					BlockUtils.setStairsData(two, BlockFace.WEST, false);
+					
+					if (xy > 0)
+					{
+						Block one_below = one.getRelative(BlockFace.DOWN);
+						one_below.setType(stairs_mat);
+						BlockUtils.setStairsData(one_below, BlockFace.WEST, true);
+						
+						Block two_below = two.getRelative(BlockFace.DOWN);
+						two_below.setType(stairs_mat);
+						BlockUtils.setStairsData(two_below, BlockFace.EAST, true);
+					}
 					
 				}
 				
@@ -59,6 +124,13 @@ public class Roof {
 					BlockState state = top.getState();
 					state.setData(new WoodenStep(species, false));
 					state.update();
+					
+					if (room.width > 1)
+					{
+						Block top_below = top.getRelative(BlockFace.DOWN);
+						top_below.setType(stairs_mat);
+						BlockUtils.setStairsData(top_below, direction, false);// TODO use block instead of stairs!
+					}
 				}
 			}
 			break;
@@ -70,22 +142,40 @@ public class Roof {
 				for (int zy = 0; zy < room.depth/2; zy++)
 				{
 					Block one = room.corner.getRelative(x, room.height+zy, zy); 
-					one.setType(stair_mat);
+					one.setType(stairs_mat);
 					BlockUtils.setStairsData(one, BlockFace.SOUTH, false);
 
+
 					Block two = room.corner.getRelative(x, room.height+zy, room.depth - 1 - zy); 
-					two.setType(stair_mat);
+					two.setType(stairs_mat);
 					BlockUtils.setStairsData(two, BlockFace.NORTH, false);
+					if (zy > 0)
+					{
+						Block one_below = one.getRelative(BlockFace.DOWN);
+						one_below.setType(stairs_mat);
+						BlockUtils.setStairsData(one_below, BlockFace.NORTH, true);
+
+						Block two_below = two.getRelative(BlockFace.DOWN);
+						two_below.setType(stairs_mat);
+						BlockUtils.setStairsData(two_below, BlockFace.SOUTH, true);
+					}
 					
 				}
 				
-				if (room.width % 2 == 1)
+				if (room.depth % 2 == 1)
 				{
 					Block top = room.corner.getRelative(x, room.height + room.depth / 2, room.depth / 2); 
 					top.setType(Material.WOOD_STEP);
 					BlockState state = top.getState();
 					state.setData(new WoodenStep(species, false));
 					state.update();
+
+					if (room.depth > 1)
+					{
+						Block top_below = top.getRelative(BlockFace.DOWN);
+						top_below.setType(stairs_mat);
+						BlockUtils.setStairsData(top_below, direction, false);// TODO use block instead of stairs!
+					}
 				}
 			}
 			break;
@@ -154,7 +244,7 @@ public class Roof {
 				
 			}
 			
-			if (room.width % 2 == 1)
+			if (room.depth % 2 == 1)
 			{
 				Block top = room.corner.getRelative(x, room.height + room.depth / 2, room.depth / 2); 
 				top.setType(blockType);
@@ -167,8 +257,7 @@ public class Roof {
 		
 	}
 	public static void makeRoofWindow(Room room, BlockFace direction, Material blockType)
-	{				
-		Material stairs_mat = MatUtils.getStairs(blockType);
+	{
 		switch (direction)
 		{
 		case NORTH:
@@ -197,7 +286,7 @@ public class Roof {
 			if (direction == BlockFace.WEST) x = 0;
 			else x = room.width - 1;
 			
-			if (room.width % 2 == 1)
+			if (room.depth % 2 == 1)
 			{
 				room.corner.getRelative(x, room.height + room.depth / 4, room.depth / 2).setType(blockType);
 			}
