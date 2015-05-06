@@ -13,6 +13,7 @@ public class Wall {
 	public Room room;
 	public BlockFace direction;
 	public ArrayList<Block> doorBlocks = new ArrayList<Block>();
+	public ArrayList<Block> windowBlocks = new ArrayList<Block>();
 	
 	public Wall(Room room, BlockFace wallDirection) {
 		this.room = room;
@@ -28,6 +29,89 @@ public class Wall {
 	public void createDoor(Material doorMaterial, Material floorMaterial, int offSet)
 	{
 		createDoor(doorMaterial, floorMaterial, offSet, false);
+	}
+	
+	public void generateWindows(Material windowMaterial)
+	{
+		int widthOrDepth = 0;
+		switch (this.direction) {
+		
+		case NORTH:
+		case SOUTH:
+			Debug.msg("NORTH or SOUTH!");
+			widthOrDepth = room.width;
+			break;
+			
+		case EAST:		
+		case WEST:
+			Debug.msg("EAST or WEST!");
+			widthOrDepth = room.depth;	
+			break;
+			
+		default:
+			Debug.err("Cannot make windows in direction "+ this.direction);	
+			break;
+		}
+		
+		Debug.msg("widthOrDepth: " + widthOrDepth);
+		
+		if(widthOrDepth <= 4) return;
+		if(room.height <= 4) return;
+		
+		for(int xory = 1; xory < widthOrDepth / 2 - 1; xory = xory+2)
+		{			
+			createWindow(windowMaterial, xory);
+			createWindow(windowMaterial, widthOrDepth - xory - 3);	
+		}
+		
+		if(widthOrDepth == 5 || (widthOrDepth % 2 == 1 && widthOrDepth % 3 == 0)) // Uneven en deelbaar door 3
+		{
+			createWindow(windowMaterial, widthOrDepth / 2 - 1); 
+		}
+
+	}
+	
+	private void createWindow(Material windowMaterial, int offSet)
+	{
+		createWindow(windowMaterial, offSet, 2);
+	}
+	
+	private void createWindow(Material windowMaterial, int offSet, int height)
+	{
+		offSet = offSet + 1;
+		
+		Block windowBlock = null;
+		
+		switch (this.direction) {
+		
+		case NORTH:
+
+			windowBlock = room.corner.getRelative(offSet, height, 0);
+			break;
+			
+		case EAST:
+
+			windowBlock = room.corner.getRelative(room.width -1, height, offSet);	
+			break;
+			
+		case SOUTH:
+
+			windowBlock = room.corner.getRelative(offSet, height, room.depth -1);
+			break;	
+		
+		case WEST:
+
+			windowBlock = room.corner.getRelative(0, height, offSet);	
+			break;
+			
+		default:
+			Debug.err("Cannot make window in direction "+ this.direction);	
+			break;
+		}
+		
+		windowBlock.setType(windowMaterial);
+		this.windowBlocks.add(windowBlock);
+		
 	}
 	
 	@SuppressWarnings("deprecation")
